@@ -48,7 +48,7 @@ class BeerControllerTest {
 
         final String expectedResponseContent = objectMapper.writeValueAsString(validBeer);
 
-        mockMvc.perform(get("/api/v1/beer/" + validBeer.getId().toString()).accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/v1/beer/" + UUID.randomUUID()).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE ))
                 .andExpect(content().json(expectedResponseContent));
