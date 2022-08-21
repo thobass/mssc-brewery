@@ -1,5 +1,8 @@
 package rocks.basset.msscbrewery.web.controller;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,16 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
+@RequiredArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
 
     private CustomerService customerService;
-
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
 
     @GetMapping({"/{customerId}"})
     public ResponseEntity<CustomerDto> getCustomer(@PathVariable("customerId") UUID customerId){
@@ -32,9 +33,11 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity handlePost(@Valid @RequestBody CustomerDto customerDto){
-        CustomerDto savedDto = customerService.saveNewCustomer(customerDto);
+    log.debug("In handle post....");
 
-        HttpHeaders headers = new HttpHeaders();
+        val savedDto = customerService.saveNewCustomer(customerDto);
+
+        val headers = new HttpHeaders();
         //TODO => Add Hostname to url
         headers.add("Location", "/api/v1/customer/" + savedDto.getId().toString());
 
