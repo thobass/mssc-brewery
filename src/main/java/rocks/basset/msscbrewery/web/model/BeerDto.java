@@ -1,5 +1,6 @@
 package rocks.basset.msscbrewery.web.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,7 +33,10 @@ public class BeerDto {
     @Positive
     private Long upc;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigDecimal price;
+
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     private OffsetDateTime createDate;
     private OffsetDateTime lastUpdateDate;
 }

@@ -9,7 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("snake")
 @JsonTest
-public class BeerDtoSnakeTest extends BaseTest{
+class BeerDtoSnakeTest extends BaseTest{
 
     @Test
     void testSnake() throws JsonProcessingException {
